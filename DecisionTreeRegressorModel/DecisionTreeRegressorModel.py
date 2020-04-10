@@ -34,7 +34,8 @@ features = ['Rooms', 'Bathroom', 'Landsize', 'Lattitude', 'Longtitude']
 X = melbourne_data_drop[features]
 
 "---------------Dividir datos de entrenamiento y valicacion--------------"
-train_X , test_X, train_y, test_y = train_test_split(X, y,random_state = 1)
+train_X , test_X, train_y, test_y = train_test_split(X, y,train_size=0.8, 
+                                                     test_size=0.2,random_state = 1)
 
 """
 "------------------------Creacion del modelo-----------------------------"
@@ -53,14 +54,14 @@ print(melbourne_mae)
 """
 
 "------------------Verificacion de cantidad de leaf----------------------"
-def get_mae(max_leaf_nodes, train_X, test_X, train_y, test_y):
-    melbourne_data_model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=0)
+def score_dataset(max_leaf_nodes, train_X, test_X, train_y, test_y):
+    melbourne_data_model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=1)
     melbourne_data_model.fit(train_X, train_y)
     melbourne_data_predict = melbourne_data_model.predict(test_X)
     melbourne_mae = mean_absolute_error(test_y, melbourne_data_predict)
     return(melbourne_mae)
 
 for max_leaf_nodes in [5, 50, 500, 5000]:
-    my_mae = get_mae(max_leaf_nodes, train_X, test_X, train_y, test_y)
+    my_mae = score_dataset(max_leaf_nodes, train_X, test_X, train_y, test_y)
     print("Max leaf nodes: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
 

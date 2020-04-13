@@ -17,7 +17,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 
 "---------------------Cargar la data u obtener los datos-----------------"
-melbourne_file_path = "/Users/juanmendezcuartas/Downloads/melb_data.csv"
+melbourne_file_path = "/Users/juanmendezcuartas/Documents/MachineLearning/Data/melb_data.csv"
 melbourne_data = pd.read_csv(melbourne_file_path)
 
 "------------------------------Analizar la data--------------------------"
